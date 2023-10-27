@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Date</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Find the Next Date</h1>
+        <div class="input-group">
+            <label>Target Day Number:</label>
+            <input type="number" id="dayNumber" placeholder="E.g., 29">
+        </div>
+        <div class="input-group">
+            <label>Target Weekday:</label>
+            <select id="weekday">
+                <option value="">Any</option>
+                <option value="0">Sunday</option>
+                <option value="1">Monday</option>
+                <!-- ... Add other days ... -->
+                <option value="6">Saturday</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Target Month:</label>
+            <select id="month">
+                <option value="">Any</option>
+                <option value="1">January</option>
+                <!-- ... Add other months ... -->
+                <option value="12">December</option>
+            </select>
+        </div>
+        <button onclick="findDate()">Find Date</button>
+        <div class="result" id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
