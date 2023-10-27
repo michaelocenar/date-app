@@ -13,9 +13,9 @@ function findDate() {
 }
 
 function findNextDate(currentDate, targetDayNumber, targetWeekday, targetMonth) {
-  targetDayNumber = targetDayNumber ? parseInt(targetDayNumber) : undefined;
-  targetWeekday = targetWeekday ? parseInt(targetWeekday) : undefined;
-  targetMonth = targetMonth !== undefined ? parseInt(targetMonth) : undefined;
+  targetDayNumber = (targetDayNumber && !isNaN(targetDayNumber) && targetDayNumber >= 1 && targetDayNumber <= 31) ? parseInt(targetDayNumber) : undefined;
+  targetWeekday = targetWeekday !== "" ? parseInt(targetWeekday) : undefined;
+  targetMonth = targetMonth !== "" ? parseInt(targetMonth) : undefined;
 
   let counter = 0;
   const maxIterations = 366;  // Maximum number of days to check (covers an entire year)
@@ -24,9 +24,9 @@ function findNextDate(currentDate, targetDayNumber, targetWeekday, targetMonth) 
       counter++;
   } while (
       (counter <= maxIterations) && 
-      ((targetDayNumber && currentDate.getDate() !== targetDayNumber) ||
-      (targetWeekday !== undefined && currentDate.getDay() !== targetWeekday) ||
-      (targetMonth !== undefined && currentDate.getMonth() !== targetMonth))
+      ((typeof targetDayNumber !== 'undefined' && currentDate.getDate() !== targetDayNumber) ||
+      (typeof targetWeekday !== 'undefined' && currentDate.getDay() !== targetWeekday) ||
+      (typeof targetMonth !== 'undefined' && currentDate.getMonth() !== targetMonth))
   );
 
   if (counter > maxIterations) {
