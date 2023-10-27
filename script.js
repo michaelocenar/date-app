@@ -20,5 +20,10 @@ function findNextDate(currentDate, targetDayNumber, targetWeekday, targetMonth) 
       (targetMonth !== undefined && currentDate.getMonth() !== targetMonth)
   );
 
-  return `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+  return formatDate(currentDate);
+}
+
+function formatDate(date) {
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  return `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
 }
