@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easter Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Easter Calculator</h1>
+
+    <label>Enter Year:</label>
+    <input type="number" id="yearInput" placeholder="e.g. 2023">
+    <button onclick="calculateEasterDetails()">Calculate</button>
+
+    <div id="results">
+        <p id="easterDate"></p>
+        <p id="beforeAnnunciation"></p>
+        <p id="nextEarliest"></p>
+        <p id="nextLatest"></p>
+    </div>
+
+    <script src="easter-script.js"></script>
+</body>
+</html>
