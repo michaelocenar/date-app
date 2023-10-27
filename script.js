@@ -3,8 +3,9 @@ function findDate() {
   const weekdayInput = document.getElementById("weekday").value;
   const monthInput = document.getElementById("month").value;
 
-  const result = findNextDate(new Date(), dayNumberInput, weekdayInput, monthInput);
-  document.getElementById("result").innerText = "Next Date: " + result;
+  const resultDate = findNextDate(new Date(), dayNumberInput, weekdayInput, monthInput);
+  const formattedResult = formatDate(resultDate);
+  document.getElementById("result").innerText = "Next Date: " + formattedResult;
 }
 
 function findNextDate(currentDate, targetDayNumber, targetWeekday, targetMonth) {
