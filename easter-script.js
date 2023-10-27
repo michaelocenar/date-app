@@ -38,3 +38,24 @@ function calculateEasterDetails() {
   while (calculateEaster(++currentYear).getMonth() !== 3 || calculateEaster(currentYear).getDate() !== 25) {}
   document.getElementById("nextLatest").innerText = `The next latest Easter will be on April 25, ${currentYear}.`;
 }
+
+function goBackToMainPage() {
+  window.location.href = "index.html";
+}
+
+function populateYearDropdown() {
+  const yearDropdown = document.getElementById("yearInput");
+  const startYear = 1900;
+  const endYear = 2100;
+
+  for (let i = startYear; i <= endYear; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = i;
+      yearDropdown.appendChild(option);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  populateYearDropdown();
+});
