@@ -44,17 +44,17 @@ function goBackToMainPage() {
 }
 
 function populateYearDropdown() {
-  const yearDropdown = document.getElementById("yearInput");
+  const yearDropdown = document.getElementById("yearList");
   const startYear = 1900;
   const endYear = 2100;
 
   for (let i = startYear; i <= endYear; i++) {
       const option = document.createElement("option");
       option.value = i;
-      option.textContent = i;
       yearDropdown.appendChild(option);
   }
 }
+
 
 document.addEventListener("DOMContentLoaded", function() {
   populateYearDropdown();
