@@ -1,5 +1,5 @@
 function calculateEaster(year) {
-  year = parseInt(year);  // Make sure the year is an integer
+  year = parseInt(year);
   const a = year % 19;
   const b = Math.floor(year / 100);
   const c = year % 100;
@@ -22,20 +22,30 @@ function calculateEasterDetails() {
   let year = document.getElementById("yearInput").value;
 
   if (year < 100) {
-      year += 2000;  // Treat "19" as "2019"
+      year += 2000;
   }
 
   const easterDate = calculateEaster(year);
   document.getElementById("easterDate").innerText = `Easter in ${year} is on: ${easterDate.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}`;
 
+  // Next Easter before Annunciation
   let currentYear = parseInt(year);
   let nextEasterBeforeAnnunciation;
   do {
       currentYear++;
       nextEasterBeforeAnnunciation = calculateEaster(currentYear);
   } while (nextEasterBeforeAnnunciation >= new Date(currentYear, 2, 25));
-
   document.getElementById("nextBeforeAnnunciation").innerText = `The next Easter before the Annunciation will be on ${nextEasterBeforeAnnunciation.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })} in the year ${currentYear}.`;
+
+  // Next earliest Easter
+  currentYear = parseInt(year);
+  while (calculateEaster(++currentYear).getMonth() !== 2 || calculateEaster(currentYear).getDate() !== 22) {}
+  document.getElementById("nextEarliest").innerText = `The next earliest Easter will be on March 22, ${currentYear}.`;
+
+  // Next latest Easter
+  currentYear = parseInt(year);
+  while (calculateEaster(++currentYear).getMonth() !== 3 || calculateEaster(currentYear).getDate() !== 25) {}
+  document.getElementById("nextLatest").innerText = `The next latest Easter will be on April 25, ${currentYear}.`;
 }
 
 function goBackToMainPage() {
@@ -44,8 +54,8 @@ function goBackToMainPage() {
 
 function populateYearDropdown() {
   const yearDropdown = document.getElementById("yearList");
-  const currentYear = new Date().getFullYear();  // Gets the current year
-  const endYear = currentYear + 200;  // Example to provide the next 200 years; adjust as needed
+  const currentYear = new Date().getFullYear();
+  const endYear = currentYear + 200;
 
   for (let i = currentYear; i <= endYear; i++) {
       const option = document.createElement("option");
