@@ -16,7 +16,7 @@ function findNextDate(currentDate, targetDayNumber, targetWeekday, targetMonth) 
   do {
       currentDate.setDate(currentDate.getDate() + 1);
   } while (
-      (targetDayNumber && currentDate.getDate() !== targetDayNumber) ||
+      (targetDayNumber !== undefined && currentDate.getDate() !== targetDayNumber) ||
       (targetWeekday !== undefined && currentDate.getDay() !== targetWeekday) ||
       (targetMonth !== undefined && currentDate.getMonth() !== targetMonth)
   );
