@@ -4,9 +4,14 @@ function findDate() {
   const monthInput = document.getElementById("month").value;
 
   const resultDate = findNextDate(new Date(), dayNumberInput, weekdayInput, monthInput);
-  const formattedResult = formatDate(resultDate);
-  document.getElementById("result").innerText = "Next Date: " + formattedResult;
+  if (resultDate) {
+      const formattedResult = formatDate(resultDate);
+      document.getElementById("result").innerText = "Next Date: " + formattedResult;
+  } else {
+      document.getElementById("result").innerText = "No valid date found.";
+  }
 }
+
 
 function findNextDate(currentDate, targetDayNumber, targetWeekday, targetMonth) {
   targetDayNumber = targetDayNumber ? parseInt(targetDayNumber) : undefined;
