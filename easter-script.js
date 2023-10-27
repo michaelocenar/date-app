@@ -1,4 +1,5 @@
 function calculateEaster(year) {
+  year = parseInt(year);  // Make sure the year is an integer
   const a = year % 19;
   const b = Math.floor(year / 100);
   const c = year % 100;
@@ -18,9 +19,13 @@ function calculateEaster(year) {
 }
 
 function calculateEasterDetails() {
-  const year = document.getElementById("yearInput").value;
+  let year = document.getElementById("yearInput").value;
+
+  if (year < 100) {
+      year += 2000;  // Treat "19" as "2019"
+  }
+
   const easterDate = calculateEaster(year);
-  
   document.getElementById("easterDate").innerText = `Easter in ${year} is on: ${easterDate.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}`;
 
   const annunciationDate = new Date(year, 2, 25);
@@ -31,11 +36,11 @@ function calculateEasterDetails() {
   }
 
   let currentYear = parseInt(year);
-  while (calculateEaster(++currentYear).getMonth() !== 2 || calculateEaster(currentYear).getDate() !== 22) {}
+  while (calculateEaster(++currentYear).getMonth() !== 2 || calculateEaster(currentYear).getDate() !== 22) { }
   document.getElementById("nextEarliest").innerText = `The next earliest Easter will be on March 22, ${currentYear}.`;
 
   currentYear = parseInt(year);
-  while (calculateEaster(++currentYear).getMonth() !== 3 || calculateEaster(currentYear).getDate() !== 25) {}
+  while (calculateEaster(++currentYear).getMonth() !== 3 || calculateEaster(currentYear).getDate() !== 25) { }
   document.getElementById("nextLatest").innerText = `The next latest Easter will be on April 25, ${currentYear}.`;
 }
 
@@ -55,8 +60,6 @@ function populateYearDropdown() {
   }
 }
 
-
-
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   populateYearDropdown();
 });
