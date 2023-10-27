@@ -10,7 +10,7 @@ function findDate() {
 function findNextDate(currentDate, targetDayNumber, targetWeekday, targetMonth) {
   targetDayNumber = targetDayNumber ? parseInt(targetDayNumber) : undefined;
   targetWeekday = targetWeekday ? parseInt(targetWeekday) : undefined;
-  targetMonth = targetMonth ? parseInt(targetMonth) - 1 : undefined;
+  targetMonth = targetMonth !== undefined ? parseInt(targetMonth) : undefined;
 
   do {
       currentDate.setDate(currentDate.getDate() + 1);
@@ -20,10 +20,32 @@ function findNextDate(currentDate, targetDayNumber, targetWeekday, targetMonth) 
       (targetMonth !== undefined && currentDate.getMonth() !== targetMonth)
   );
 
-  return formatDate(currentDate);
+  return currentDate;
 }
 
 function formatDate(date) {
   const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   return `${monthNames[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+}
+
+function findFurthestDate() {
+  const currentDate = new Date();
+  let furthestDate = new Date(currentDate);
+  let maxDifference = 0;
+
+  for (let month = 0; month < 12; month++) {
+      for (let day = 1; day <= 31; day++) {
+          for (let weekday = 0; weekday < 7; weekday++) {
+              const nextDate = findNextDate(new Date(currentDate), day, weekday, month);
+              const difference = (new Date(nextDate) - currentDate) / (1000 * 60 * 60 * 24);
+
+              if (difference > maxDifference) {
+                  maxDifference = difference;
+                  furthestDate = new Date(nextDate);
+              }
+          }
+      }
+  }
+
+  document.getElementById("result").innerText = "Furthest Date: " + formatDate(furthestDate);
 }
