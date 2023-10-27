@@ -28,20 +28,14 @@ function calculateEasterDetails() {
   const easterDate = calculateEaster(year);
   document.getElementById("easterDate").innerText = `Easter in ${year} is on: ${easterDate.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })}`;
 
-  const annunciationDate = new Date(year, 2, 25);
-  if (easterDate < annunciationDate) {
-      document.getElementById("beforeAnnunciation").innerText = `Easter is before the Annunciation of the Lord in ${year}.`;
-  } else {
-      document.getElementById("beforeAnnunciation").innerText = `Easter is after the Annunciation of the Lord in ${year}.`;
-  }
-
   let currentYear = parseInt(year);
-  while (calculateEaster(++currentYear).getMonth() !== 2 || calculateEaster(currentYear).getDate() !== 22) { }
-  document.getElementById("nextEarliest").innerText = `The next earliest Easter will be on March 22, ${currentYear}.`;
+  let nextEasterBeforeAnnunciation;
+  do {
+      currentYear++;
+      nextEasterBeforeAnnunciation = calculateEaster(currentYear);
+  } while (nextEasterBeforeAnnunciation >= new Date(currentYear, 2, 25));
 
-  currentYear = parseInt(year);
-  while (calculateEaster(++currentYear).getMonth() !== 3 || calculateEaster(currentYear).getDate() !== 25) { }
-  document.getElementById("nextLatest").innerText = `The next latest Easter will be on April 25, ${currentYear}.`;
+  document.getElementById("nextBeforeAnnunciation").innerText = `The next Easter before the Annunciation will be on ${nextEasterBeforeAnnunciation.toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' })} in the year ${currentYear}.`;
 }
 
 function goBackToMainPage() {
