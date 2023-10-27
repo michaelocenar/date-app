@@ -45,15 +45,16 @@ function goBackToMainPage() {
 
 function populateYearDropdown() {
   const yearDropdown = document.getElementById("yearList");
-  const startYear = 1900;
-  const endYear = 2100;
+  const currentYear = new Date().getFullYear();  // Gets the current year
+  const endYear = currentYear + 200;  // Example to provide the next 200 years; adjust as needed
 
-  for (let i = startYear; i <= endYear; i++) {
+  for (let i = currentYear; i <= endYear; i++) {
       const option = document.createElement("option");
       option.value = i;
       yearDropdown.appendChild(option);
   }
 }
+
 
 
 document.addEventListener("DOMContentLoaded", function() {
